@@ -6,7 +6,7 @@ from functools import wraps
 #  create the application object
 app = Flask(__name__)
 
-app.secret_key= "my precious"
+app.secret_key= "my preciousas"
 
 # login required decorator
 def login_required(f):
