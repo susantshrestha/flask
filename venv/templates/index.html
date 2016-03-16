@@ -2,6 +2,11 @@
 {% block content %}
 
 <h1>welcome to you</h1><br>
-<p>click <a href="/logout">here</a> to logout</p>
+<p>click <a href="/logout">here</a> to logout</p><br>
+ <h3>posts</h3>
+{% for post in posts %}
+    <strong>title:</strong> {{ post.title}} <br>
+    <strong>post:</strong> {{ post.description}} <br>
+{% endfor %}
 
 {% endblock %}

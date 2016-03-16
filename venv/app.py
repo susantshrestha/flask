@@ -1,5 +1,6 @@
+import sqlite3
 
-from flask import Flask, render_template, request, url_for,redirect, session,flash
+from flask import Flask, render_template, request, url_for,redirect, session,flash, g
 from functools import wraps
 
 
@@ -7,6 +8,9 @@ from functools import wraps
 app = Flask(__name__)
 
 app.secret_key= "my preciousas"
+
+# create database
+app.database = "sample.db"
 
 # login required decorator
 def login_required(f):
@@ -23,7 +27,13 @@ def login_required(f):
 @app.route('/')
 @login_required
 def home():
-    return render_template('index.html')
+
+    g.db = connect_db()
+    cur = g.db.execute('select * from posts')
+    posts = [dict(title=row[0], description=row[1]) for row in cur.fetchall()]
+    g.db.close()
+    return render_template('index.html',posts=posts)
+
     # return 'hello world'
 
 @app.route('/welcome')
@@ -48,6 +58,9 @@ def logout():
     session.pop('logged_in',None)
     flash('you are just logged out!')
     return redirect(url_for('welcome'))
+
+def connect_db():
+    return sqlite3.connect(app.database)
 
 # start the server with the 'run()' method
 if __name__=='__main__':
