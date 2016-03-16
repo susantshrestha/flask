@@ -1,10 +1,12 @@
-<<<<<<< HEAD
+
 from flask import Flask, render_template, request, url_for,redirect, session,flash
 from functools import wraps
+
+
 #  create the application object
 app = Flask(__name__)
 
-app.secret_key= "my preciouss"
+app.secret_key= "my preciou"
 
 # login required decorator
 def login_required(f):
@@ -50,15 +52,6 @@ def logout():
 # start the server with the 'run()' method
 if __name__=='__main__':
     app.run(debug=True)
-=======
-from flask import Flask
 
-app = Flask(__name__)
 
-@app.route('/')
-def welcome():
-    return 'welcome susant'
 
-if __name__=='__main__':
-    app.run()
->>>>>>> 82e5ac040b6f6301390393169aa3223707202afc
